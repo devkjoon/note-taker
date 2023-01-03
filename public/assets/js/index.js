@@ -1,8 +1,8 @@
-let noteTitle;
-let noteText;
-let saveNoteBtn;
-let newNoteBtn;
-let noteList;
+let noteTitle = document.querySelector('.note-title');
+let noteText = document.querySelector('.note-textarea');
+let saveNoteBtn = document.querySelector('.save-note');
+let newNoteBtn = document.querySelector('.new-note');
+let noteList = $document.querySelectorAll(".list-container .list-group");
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
@@ -108,6 +108,7 @@ const handleNewNoteView = (e) => {
   renderActiveNote();
 };
 
+// ? Sets the save button to either show or hide depending on whether or not there are text inputs
 const handleRenderSaveBtn = () => {
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     hide(saveNoteBtn);
@@ -175,7 +176,9 @@ const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
+  noteList.addEventListener('click', '.list-group-item', handleNoteView);
   newNoteBtn.addEventListener('click', handleNewNoteView);
+  noteList.addEventListener('click', '.delete-note', handleNoteDelete);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
