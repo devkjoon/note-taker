@@ -2,7 +2,7 @@ let noteTitle = document.querySelector('.note-title');
 let noteText = document.querySelector('.note-textarea');
 let saveNoteBtn = document.querySelector('.save-note');
 let newNoteBtn = document.querySelector('.new-note');
-let noteList = $document.querySelectorAll(".list-container .list-group");
+let noteList = document.querySelectorAll(".list-container .list-group");
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
@@ -50,21 +50,26 @@ const deleteNote = (id) =>
     },
   });
 
-const renderActiveNote = () => {
-  hide(saveNoteBtn);
-
-  if (activeNote.id) {
-    noteTitle.setAttribute('readonly', true);
-    noteText.setAttribute('readonly', true);
-    noteTitle.value = activeNote.title;
-    noteText.value = activeNote.text;
-  } else {
-    noteTitle.removeAttribute('readonly');
-    noteText.removeAttribute('readonly');
-    noteTitle.value = '';
-    noteText.value = '';
-  }
-};
+  const renderActiveNote = () => {
+    if (noteTitle.value.trim() && noteText.value.trim()) {
+      show(saveNoteBtn);
+    } else {
+      hide(saveNoteBtn);
+    }
+  
+    if (activeNote.id) {
+      noteTitle.setAttribute('readonly', true);
+      noteText.setAttribute('readonly', true);
+      noteTitle.value = activeNote.title;
+      noteText.value = activeNote.text;
+    } else {
+      noteTitle.removeAttribute('readonly');
+      noteText.removeAttribute('readonly');
+      noteTitle.value = '';
+      noteText.value = '';
+    }
+  };
+  
 
 const handleNoteSave = () => {
   const newNote = {
