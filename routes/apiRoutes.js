@@ -1,27 +1,35 @@
-const fs = require('fs');
+const path = require('path');
+const fs = require('fs')
 
-const { v4: uuidv4 } = require('uuid');
+let uniqid = require('uniqid');
 
-module.exports = function (app) {
-    app.get('/api/notes', (req, res) => {
-        let data = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
-        res.json(data);
-    });
+module.exports = (app) => {
 
-    app.post("/api/notes", (req, res) => {
-        const newNote = req.body;
-        newNote.id = uuidv4();
-        let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-        data.push(newNote);
-        fs.writeFileSync('./db/db.json', JSON.stringify(data));
-        res.json(data);
-    });
+  app.get('/api/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './db/db.json'));
+  });
 
-    app.delete("/api/notes/:id", (req, res) => {
-        let noteId = req.params.id.toString();
-        let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-        const newData = data.filter( note => note.id.toString() !== noteId );
-        fs.writeFileSync('./db/db.json', JSON.stringify(newData));
-        res.json(newData);
-    });
-}
+  app.post('/api/notes', (req, res) => {
+    let db = fs.readFileSync('./db/db.json');
+    db = JSON.parse(db);
+    res.json(db);
+    let userNote = {
+      title: req.body.title,
+      text: req.body.text,
+      id: uniqid(),
+    };
+
+    db.push(userNote);
+    fs.writeFileSync('./db/db.json', JSON.stringify(db));
+    res.json(db);
+
+  });
+
+  app.delete('/api/notes/:id', (req, res) => {
+    let db = JSON.parse(fs.readFileSync('./db/db.json'))
+    let deleteNotes = db.filter(item => item.id !== req.params.id);
+    fs.writeFileSync('./db/db.json', JSON.stringify(deleteNotes));
+    res.json(deleteNotes);
+    
+  })
+};
