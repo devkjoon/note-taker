@@ -1,8 +1,8 @@
-let noteTitle
-let noteText
-let saveNoteBtn
-let newNoteBtn
-let noteList
+let noteTitle;
+let noteText;
+let saveNoteBtn;
+let newNoteBtn;
+let noteList;
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
@@ -176,9 +176,7 @@ const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
-  noteList.addEventListener('click', '.list-group-item', handleNoteView);
   newNoteBtn.addEventListener('click', handleNewNoteView);
-  noteList.addEventListener('click', '.delete-note', handleNoteDelete);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
