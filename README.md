@@ -23,7 +23,7 @@ Note Taker is used to write and save notes. This application will use an Express
 ## Installation
 
 To use the note taker application,
-- Navigate to [Note Taker](https://github.com/devkjoon/note-taker)
+- Navigate to [Note Taker](https://agile-sea-28087.herokuapp.com/)
 
 ## Usage
 
