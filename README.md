@@ -43,7 +43,7 @@ To use the note taker application,
 
 ## Preview
 
-
+https://user-images.githubusercontent.com/114375310/210824983-293f09c5-f8d6-4262-b8bb-b6c9da96a9c3.mp4
 
 ## License
 
