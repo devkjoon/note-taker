@@ -18,6 +18,7 @@ Note Taker is used to write and save notes. This application will use an Express
 - CSS
 - JavaScript
 - Node.js
+- Express.js
 - UniqID
 
 ## Installation
